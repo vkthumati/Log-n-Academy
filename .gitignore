@@ -1,0 +1,24 @@
+*.class
+
+.metadata/
+.settings/
+.classpath
+.project
+.cache
+.extract
+bin/
+.idea
+
+/target/
+
+target/
+.target/
+IafMOD_IS_UNDEFINED/
+generated/
+null/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.iml
