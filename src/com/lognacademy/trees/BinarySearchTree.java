@@ -3,6 +3,8 @@ package com.lognacademy.trees;
 import java.util.Comparator;
 import java.util.Stack;
 
+import com.thumati.ds.stacks.infixpostfixprefix.MyStack;
+
 public class BinarySearchTree<T> {
 	
 	private class Node<T>{
@@ -142,6 +144,90 @@ public class BinarySearchTree<T> {
 		}
 		return successor;
 	}
+	
+	public void preOrderTraversal(Node<T> node) {
+		if(node!=null) {
+			System.out.println(node.data);
+			preOrderTraversal(node.left);
+			preOrderTraversal(node.right);
+		}
+	}
+	
+	public void inOrderTraversal(Node<T> node) {
+		if(node!=null) {
+			preOrderTraversal(node.left);
+			System.out.println(node.data);
+			preOrderTraversal(node.right);
+		}
+	}
+	
+	public void postOrderTraversal(Node<T> node) {
+		if(node!=null) {
+			preOrderTraversal(node.left);
+			preOrderTraversal(node.right);
+			System.out.println(node.data);
+		}
+	}
+	
+	public void inOrderIterativeTraversal() {
+		Node<T> current = root;
+		MyStack<Node<T>> stack = new MyStack<Node<T>>();
+		
+		while(current!=null) {
+			stack.push(current);
+			current=current.left;
+		}
+		
+		while(!stack.isEmpty()) {
+			current = stack.pop();
+			System.out.print(current.data+" ");
+			if(current.right!=null) {
+				current = current.right;
+				while(current!=null) {
+					stack.push(current);
+					current=current.left;
+				}
+			}
+		}
+	}
+	
+	void morrisTraversal(Node<T> root) {
+        Node<T> current, next;
+          
+        if (root == null)
+            return;
+          
+        current = root;
+        while (current != null) 
+        {
+            if (current.left == null) 
+            {
+                System.out.print(current.data + " ");
+                current = current.right;
+            }
+            else
+            {
+                next = current.left;
+                while (next.right != null && next.right != current) 
+                    next = next.right;
+                 
+                if (next.right == null) 
+                {
+                    next.right = current;
+                    current = current.left;
+                }   
+                else
+                {
+                    next.right = null;
+                    System.out.print(current.data + " ");
+                    current = current.right;
+                }   /* End of if condition pre->right == NULL */
+                  
+            } /* End of if condition current->left == NULL*/
+              
+        } /* End of while */
+          
+    }
 	
 	public void displayTree() {
         Stack<Node<T>> globalStack = new Stack<Node<T>>();
